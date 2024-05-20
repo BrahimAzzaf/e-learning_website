@@ -1,0 +1,18 @@
+/* Tailwind CSS utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --primary-color: #0B7077;
+  --secondary-color: #D2E6E4;
+  --text-color: #FFFFFF;
+  --button-color: #063D41;
+  --third-color: #23A6F0;
+}
+
+/* Custom CSS to hide the scrollbar */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
