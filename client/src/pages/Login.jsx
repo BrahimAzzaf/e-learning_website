@@ -31,7 +31,7 @@ const Login = () => {
       } else {
         setData({  });
         toast.success('Login Successful. Welcome!');
-        navigate('/dashboard');
+        navigate('/formation');
       }
     } catch (error) {
       console.error('Error logging in:', error);

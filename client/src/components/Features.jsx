@@ -2,7 +2,7 @@ import React from 'react'
 
 function Features() {
   return (
-    <div>
+    <div >
       {/* -------------------Features-------------------------- */}
       <div className="  grid grid-cols-1 gap-10 md:grid-cols-2  lg:grid-cols-3   px-20 my-20 " id="Features">
         {/* card 1 */}

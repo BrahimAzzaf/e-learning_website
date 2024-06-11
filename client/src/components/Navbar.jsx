@@ -1,20 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
     <div>
-      <header className="bg-[--primary-color] text-xl font-semibold lg:flex lg:flex-row sm:flex sm:flex-col sm:items-center justify-between items-center p-4 px-7">
-        <div>
-        <Link to="/" className="">
-          <img src="./white-logo.svg" alt="logo" className=" object-cover w-16 cursor-pointer" />
+      <header className="bg-[--primary-color]  text-xl font-semibold lg:flex lg:flex-row sm:flex sm:flex-col sm:items-center justify-between items-center p-4 px-7">
+        <div >
+          <Link to="/" className="">
+            <img src="./white-logo.svg" alt="logo" className=" object-cover w-16 cursor-pointer" />
           </Link>
         </div>
         <div className="lg:flex justify-around items-center sm:hidden">
           <ul className="list-none lg:flex gap-2 text-[--text-color]">
-            <li><Link to="/Home">Home</Link></li>
-            <li><Link to="#Features">Features</Link></li>
-            <li><Link to="#About">About</Link></li>
+            <li><a href="#Home" className="scroll-smooth">Home</a></li>
+            <li><a href="#Features" className="scroll-smooth">Features</a></li>
+            <li><a href="#About" className="transition  delay-1000 duration-300 	 scroll-smooth">About</a></li>
           </ul>
         </div>
         <Link to="/login" className="text-decoration-none">
@@ -23,10 +23,8 @@ function Navbar() {
           </button>
         </Link>
       </header>
-
     </div>
-
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

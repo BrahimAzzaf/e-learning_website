@@ -1,22 +1,25 @@
-// Dashboard.js
-import React, { useContext } from 'react';
-import { UserContext } from '../../context/userContext';
+import React, { useState } from 'react';
+import DashProfile from "../components/DashProfile";
+import DashSidebar from "../components/DashSidebar";
+import DashUsers from "../components/DashUsers";
+import DashHome from '../components/DashHome';
 
 function Dashboard() {
-    const { user } = useContext(UserContext);
-    
-    console.log('Dashboard user:', user); // Log the user data
+  const [view, setView] = useState('users'); // Default to 'users' view
 
-    if (!user) {
-        return <div>Loading...</div>; // Handle loading state
-    }
+  return (
+    <div className="min-h-screen bg-gray-100 flex">
+      {/* Sidebar */}
+      <DashSidebar setView={setView} />
 
-    return (
-        <div className='p-10 flex flex-col items-center justify-center'>
-            <h1 className='text-xl font-bold text-[--primary-color] text-center'>Dashboard</h1>
-            <h1>Welcome {user.name}!</h1>
-        </div>
-    );
+      {/* Main Content */}
+      <div className="flex flex-col flex-grow">
+        {view === 'home' && <DashHome />}
+        {view === 'users' && <DashUsers />}
+        {view === 'profile' && <DashProfile />}
+      </div>
+    </div>
+  );
 }
 
 export default Dashboard;

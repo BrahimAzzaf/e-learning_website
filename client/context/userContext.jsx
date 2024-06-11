@@ -7,7 +7,7 @@ export function UserContextProvider({ children }) {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        axios.get('/profile')
+        axios.get('/dashboard')
             .then(({ data }) => {
                 console.log('User data:', data); // Log the user data
                 setUser(data); // Ensure data has a name field

@@ -20,8 +20,11 @@ function Form() {
 
     return (
         <>
-    
-    <Navbar />
+        
+        <Navbar />
+
+        
+
             <h2 className="text-6xl font-bold mb-2 text-center p-10 text-[--button-color]">Please Fill Up The Form</h2>
             <div className="w-full flex items-center justify-center bg-white">
                 <form className="w-full flex flex-col justify-center lg:max-w-3xl p-8" onSubmit={handleSubmit}>

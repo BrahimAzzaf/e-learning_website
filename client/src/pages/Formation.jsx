@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { UserContext } from '../../context/userContext';
 
@@ -20,7 +19,6 @@ function Formation() {
     '3lXuWHtm7PM',
     'sBFemL2Mfj4',
     'XxkX8wnRq3s',
-    // Add more video IDs as needed
   ];
   
   const handleVideoClick = (videoId) => {
@@ -30,17 +28,25 @@ function Formation() {
   return (
     <>
     
-    <Navbar />
-      <div className="h-full p-6 bg-[--secondary-color]">
-      {!!user && <h1 className='text-black'>Welcom {user.name}!</h1>}
+    
+    <header className="bg-[--primary-color] text-xl font-semibold lg:flex lg:flex-row sm:flex sm:flex-col sm:items-center justify-center items-center p-4 px-7">
+        <div>
+        <Link to="/" className="">
+          <img src="./white-logo.svg" alt="logo" className=" object-cover w-16 cursor-pointer" />
+          </Link>
+        </div>
+      </header>
 
-        <h1 className="w-full flex justify-center text-[--button-color] text-6xl font-bold p-4 text-center leading-[120%]">
-          Grow up your skills by online courses with LogoName
+
+      <div className="h-full p-6 bg-[--secondary-color]">
+
+        <h1 className=" flex justify-center text-[--button-color] text-5xl font-bold p-4 text-center leading-[100%]">
+          Grow up your skills by online courses with  <span className='text-6xl ml-2'>  LogoName</span> 
         </h1>
 
         <div className="w-full flex flex-col items-center justify-center p-12 ">
           <div className="flex gap-10 justify-between w-full bg-none">
-          <div className="flex flex-col gap-4 p-1 mb-8 w-48  max-w-52 h-[400px]   rounded-md shadow-xl shadow-slate-100  max-h-[720px] hide-scrollbar overflow-x-auto scroll-snap-type-x-mandatory">
+          <div className="flex flex-col gap-4 p-1 mb-8 w-48  max-w-52 h-[490px]   rounded-md   max-h-[720px]  overflow-x-auto scrollbar-thin ">
               {videos.map((videoId, index) => (
                 <img
                 key={index}
@@ -52,9 +58,9 @@ function Formation() {
               
               ))}
             </div>
-            <div className='w-full h-full rounded-md shadow-md shadow-black '>
+            <div className='w-11/12  h-full rounded-md shadow-md shadow-black '>
               {selectedVideo && (
-                <div className="w-full h-96 ">
+                <div className=" h-[490px]">
                   <iframe
                     id="player"
                     type="text/html"
