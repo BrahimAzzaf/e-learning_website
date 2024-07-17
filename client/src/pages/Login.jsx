@@ -21,15 +21,17 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = data;
     try {
-      const {data} = await axios.post('/login', 
-      { email, 
+      const response = await axios.post('http://localhost:8000/api/auth/login', {
+        email,
         password
+      }, {
+        withCredentials: true  // Ensure credentials are sent with the request
       });
 
-      if (data.error) {
-        toast.error(data.error);
+      if (response.data.error) {
+        toast.error(response.data.error);
       } else {
-        setData({  });
+        setData({ email: '', password: '' });
         toast.success('Login Successful. Welcome!');
         navigate('/formation');
       }

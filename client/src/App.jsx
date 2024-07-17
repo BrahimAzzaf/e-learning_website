@@ -10,6 +10,9 @@ import axios from 'axios';
 import {Toaster} from 'react-hot-toast'
 import {UserContextProvider} from '../context/userContext/'
 import Dashboard from './pages/Dashboard';
+import ViewUser from './pages/ViewUser';
+import EditUser from './pages/EditUser';
+import AddUser from './pages/AddUser';
 
 
 axios.defaults.baseURL= 'http://localhost:8000';
@@ -26,6 +29,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/formation" element={<Formation />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/add-user" element={<AddUser />} />
+        <Route path="/view-user/:userId" element={<ViewUser />} />
+        <Route path="/edit-user/:userId" element={<EditUser />} />
         <Route path="/form" to="/form" element={<Form />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

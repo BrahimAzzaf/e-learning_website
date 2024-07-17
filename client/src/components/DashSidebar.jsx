@@ -2,8 +2,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PeopleIcon from '@mui/icons-material/People';
-import PersonIcon from '@mui/icons-material/Person';
+// import PersonIcon from '@mui/icons-material/Person';
+import SchoolIcon from '@mui/icons-material/School';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 
 function DashSidebar({ setView }) {
   return (
@@ -20,8 +22,11 @@ function DashSidebar({ setView }) {
         <button onClick={() => setView('users')} className="w-56 py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center">
           <PeopleIcon className="mr-2" /> Users
         </button>
+        <button onClick={() => setView('courses')} className="w-56 py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center">
+          <SchoolIcon className="mr-2" /> Courses
+        </button>
         <button onClick={() => setView('profile')} className="w-56 py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center">
-          <PersonIcon className="mr-2" /> Profile
+          <OndemandVideoIcon className="mr-2" /> Videos
         </button>
       </nav>
     </div>
