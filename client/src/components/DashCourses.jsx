@@ -1,56 +1,56 @@
-// DashUsers.jsx
+// DashCourses.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import ConfirmDeletePopup from '../components/ConfirmDeletePopupUser';
+import ConfirmDeletePopup from '../components/ConfirmDeletePopupCourse';
 
-function DashUsers() {
-  const [users, setUsers] = useState([]);
+function DashCourses() {
+  const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [popupOpen, setPopupOpen] = useState(false);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchCourses = async () => {
       try {
-        const response = await axios.get('/api/users', { withCredentials: true });
-        setUsers(response.data);
+        const response = await axios.get('/api/courses');
+        setCourses(response.data);
       } catch (error) {
-        console.error('Error fetching users', error);
+        console.error('There was an error fetching the courses!', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUsers();
+    fetchCourses();
   }, []);
 
-  const handleDeleteUser = async () => {
-    if (!selectedUserId) return;
+  const handleDeleteCourse = async () => {
+    if (!selectedCourseId) return;
     try {
-      const response = await axios.delete(`/api/users/${selectedUserId}`, { withCredentials: true });
+      const response = await axios.delete(`/api/courses/${selectedCourseId}`);
       if (response.status === 200) {
-        setUsers(users.filter(user => user._id !== selectedUserId));
-        console.log('User deleted successfully');
+        setCourses(courses.filter(course => course._id !== selectedCourseId));
+        console.log('Course deleted successfully');
       } else {
-        console.error('Failed to delete user');
+        console.error('Failed to delete course');
       }
     } catch (error) {
-      console.error('Error deleting user', error);
+      console.error('Error deleting course', error);
     } finally {
       setPopupOpen(false);
-      setSelectedUserId(null);
+      setSelectedCourseId(null);
     }
   };
 
-  const handleOpenPopup = (userId) => {
-    setSelectedUserId(userId);
+  const handleOpenPopup = (courseId) => {
+    setSelectedCourseId(courseId);
     setPopupOpen(true);
   };
 
   const handleClosePopup = () => {
     setPopupOpen(false);
-    setSelectedUserId(null);
+    setSelectedCourseId(null);
   };
 
   if (loading) {
@@ -59,31 +59,28 @@ function DashUsers() {
 
   return (
     <div className="flex-1 p-10">
-      <h1 className="text-3xl font-semibold mb-6">User Section</h1>
+      <h1 className="text-3xl font-semibold mb-6">Courses Section</h1>
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-medium">User List</h2>
+          <h2 className="text-2xl font-medium">Course List</h2>
           <Link
-            to="/add-user"
+            to="/add-course"
             className="bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
           >
-            Add User
+            Add Course
           </Link>
         </div>
         <table className="min-w-full bg-white">
           <thead>
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Image
+                Title
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Name
+                Description
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Email
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Role
+                Created At
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Action
@@ -91,34 +88,31 @@ function DashUsers() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {users.map(user => (
-              <tr key={user._id}>
-                <td className="py-2 px-4 border-b">
-                  <img
-                    src={user.image}
-                    alt={user.name}
-                    className="w-10 h-10 object-cover rounded-full"
-                  />
+            {courses.map((course) => (
+              <tr key={course._id}>
+                <td className="px-6 py-4 whitespace-nowrap">{course.title}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div dangerouslySetInnerHTML={{ __html: course.description }} />
                 </td>
-                <td className="py-2 px-4 border-b">{user.name}</td>
-                <td className="py-2 px-4 border-b">{user.email}</td>
-                <td className="py-2 px-4 border-b">{user.isAdmin ? 'Admin' : 'User'}</td>
-                <td className='border-b py-2'>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {new Date(course.createdAt).toLocaleDateString()}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex gap-3">
                     <Link
-                      to={`/view-user/${user._id}`}
+                      to={`/view-course/${course._id}`}
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                     >
                       View
                     </Link>
                     <Link
-                      to={`/edit-user/${user._id}`}
+                      to={`/edit-course/${course._id}`}
                       className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                     >
                       Edit
                     </Link>
                     <button
-                      onClick={() => handleOpenPopup(user._id)}
+                      onClick={() => handleOpenPopup(course._id)}
                       className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                     >
                       Delete
@@ -133,10 +127,10 @@ function DashUsers() {
       <ConfirmDeletePopup
         open={popupOpen}
         handleClose={handleClosePopup}
-        handleConfirm={handleDeleteUser}
+        handleConfirm={handleDeleteCourse}
       />
     </div>
   );
 }
 
-export default DashUsers;
+export default DashCourses;

@@ -1,5 +1,3 @@
-// index.js
-
 const express = require('express');
 const dotenv = require('dotenv').config();
 const cors = require('cors');
@@ -15,7 +13,8 @@ mongoose.connect(process.env.MONGO_URL, {
 .catch((err) => console.log('Database not connected', err));
 
 // Middlewares
-app.use(express.json());
+app.use(express.json({ limit: '50mb' })); // Increase payload limit
+app.use(express.urlencoded({ limit: '50mb', extended: true })); // Increase payload limit
 app.use(cookieParser());
 
 // Configure CORS middleware
@@ -25,8 +24,8 @@ app.use(cors({
 }));
 
 // Routes
-// app.use('/', require('./routes/authRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/courses', require('./routes/coursesRoute'));
 app.use('/', require('./routes/dashboardRoutes'));
 app.use('/api', require('./routes/userRoutes'));
 

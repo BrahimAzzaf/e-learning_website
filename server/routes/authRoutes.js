@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const cors = require('cors');
 const { registerUser, test, getProfile, logoutUser, loginUser } = require('../controllers/authCotroller');
-const { registerUser, loginUser, test, getProfile } = require('../controllers/authCotroller');
 
 //middleware
 router.use(
