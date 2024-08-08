@@ -42,23 +42,25 @@ const CourseDetails = () => {
       <div className="min-h-screen flex">
         
         {/* Main Content */}
-        <div className="flex flex-col flex-grow p-10">        
-          <div className="flex flex-col items-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl">
+        <div className="overflow-x-auto w-full">
+
+        <div className="flex flex-col flex-grow p-10 ">        
+          <div className="flex flex-col items-center  overflow-x-auto ">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl overflow-x-auto  ">
               <h1 className="text-4xl font-bold mb-4">{course.title}</h1>
 
               {/* Conditional Rendering for Image or Video */}
               {course.videoLinks && course.videoLinks.length > 0 ? (
                 <ReactPlayer
                   url={course.videoLinks[0]} // Assuming you want to show the first video
-                  className="w-full h-64 object-cover rounded-lg mb-4"
+                  className=" object-cover rounded-lg mb-4 w-fit h-fit items-center"
                   controls
                 />
               ) : (
                 <img
                   src={course.image}
                   alt={course.title}
-                  className="w-full h-64 object-cover rounded-lg mb-4"
+                  className=" h-64 object-cover rounded-lg mb-4 w-fit"
                 />
               )}
 
@@ -83,7 +85,7 @@ const CourseDetails = () => {
 
               {/* Attachments Download Button */}
               {course.attachments && course.attachments.length > 0 && (
-                <div className="mt-4">
+                <div className="mt-4 ">
                   {course.attachments.map((attachment, index) => (
                     <a
                       key={index}
@@ -98,6 +100,7 @@ const CourseDetails = () => {
               )}
             </div>
           </div>
+        </div>
         </div>
       </div>
     </>

@@ -139,9 +139,11 @@ const Formation = () => {
     <>
     <Navbar/>
     <div>
-    <h1 className=" flex justify-center text-[--button-color] text-5xl font-bold p-4 text-center leading-[100%]">
-           Grow up your skills by online courses with  <span className='text-6xl ml-2'>  LogoName</span> 
-         </h1>
+      <h1 className="flex flex-col items-center text-[--button-color] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold p-4 text-center leading-tight sm:leading-snug lg:leading-[100%]">
+  Grow up your skills by online courses with 
+  <span className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl ml-2'>LogoName</span>
+</h1>
+
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {courses.map((course) => (
@@ -150,45 +152,7 @@ const Formation = () => {
         </div>
       </div>
 
-      <div className="py-2 border-[3px] border-[--button-color] rounded-xl mb-10">
-          <h1 className="w-full text-[--button-color] text-3xl font-bold p-4 text-start leading-[120%]">
-            Grow up your skills by online courses with LogoName
-          </h1>
-          <ul className="py-4 w-4/5">
-            <li>
-              <p className="w-full text-justify text-[--primary-color] text-xl font-medium p-4">
-                <ArrowForwardIosIcon fontSize="small" />
-                <span className="font-semibold text-2xl">Result 1:</span> Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Nemo,
-                obcaecati at vitae quod molestias
-              </p>
-            </li>
-            <li>
-              <p className="w-full text-justify text-[--primary-color] text-xl font-medium p-4">
-                <ArrowForwardIosIcon fontSize="small" />
-                <span className="font-semibold text-2xl">Result 2:</span> Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Nemo,
-                obcaecati at vitae quod molestias
-              </p>
-            </li>
-            <li>
-              <p className="w-full text-justify text-[--primary-color] text-xl font-medium p-4">
-                <ArrowForwardIosIcon fontSize="small" />
-                <span className="font-semibold text-2xl">Result 3:</span> Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Nemo,
-                obcaecati at vitae quod molestias
-              </p>
-            </li>
-            <li>
-              <p className="w-full text-justify text-[--primary-color] text-xl font-medium p-4">
-                <ArrowForwardIosIcon fontSize="small" />
-                <span className="font-semibold text-2xl">Result 4:</span> Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Nemo,
-                obcaecati at vitae quod molestias
-              </p>
-            </li>
-          </ul>
-        </div>
+      
 
         <div className="flex justify-center items-center">
           <Link to="/form">

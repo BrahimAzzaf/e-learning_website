@@ -57,16 +57,18 @@ function DashUsers() {
   // Show loader while user data is being fetched
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center">
-        <img src={loaderGif} alt="Loading..." className="w-16 h-16" />
+      <div className="min-h-screen flex justify-center items-center ">
+        <img src={loaderGif} alt="Loading..." className="w-16 h-16 " />
       </div>
     );
   }
 
   return (
-    <div className="flex-1 p-10">
+    <div className="flex-1 py-8 pl-3 pr-4 overflow-x-auto">
       <h1 className="text-3xl font-semibold mb-6">User Section</h1>
-      <div className="bg-white p-6 rounded-lg shadow-lg">
+
+      <div className="bg-white p-3 rounded-lg shadow-lg">
+      <div className="overflow-x-auto">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-medium">User List</h2>
           <Link
@@ -76,65 +78,67 @@ function DashUsers() {
             Add User
           </Link>
         </div>
-        <table className="min-w-full bg-white">
-          <thead>
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Image
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Name
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Email
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Role
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {users.map(user => (
-              <tr key={user._id}>
-                <td className="py-2 px-4 border-b">
-                  <img
-                    src={user.image}
-                    alt={user.name}
-                    className="w-10 h-10 object-cover rounded-full"
-                  />
-                </td>
-                <td className="py-2 px-4 border-b">{user.name}</td>
-                <td className="py-2 px-4 border-b">{user.email}</td>
-                <td className="py-2 px-4 border-b">{user.isAdmin ? 'Admin' : 'User'}</td>
-                <td className='border-b py-2'>
-                  <div className="flex gap-3">
-                    <Link
-                      to={`/view-user/${user._id}`}
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
-                    >
-                      View
-                    </Link>
-                    <Link
-                      to={`/edit-user/${user._id}`}
-                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      onClick={() => handleOpenPopup(user._id)}
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+  <table className="min-w-full bg-white">
+    <thead>
+      <tr>
+        <th className="px-2 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wide sm:px-4 sm:py-2 sm:text-sm md:px-6 md:py-3 md:text-base lg:text-lg">
+          Image
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Name
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Email
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Role
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody className="bg-white divide-y divide-gray-200">
+      {users.map(user => (
+        <tr key={user._id}>
+          <td className="py-2 px-4 border-b">
+            <img
+              src={user.image}
+              alt={user.name}
+              className="w-10 h-10 object-cover rounded-full"
+            />
+          </td>
+          <td className="py-1 px-2 border-b">{user.name}</td>
+          <td className="py-1 px-2 border-b">{user.email}</td>
+          <td className="py-1 px-2 border-b">{user.isAdmin ? 'Admin' : 'User'}</td>
+          <td className='border-b py-2'>
+            <div className="flex gap-3">
+              <Link
+                to={`/view-user/${user._id}`}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+              >
+                View
+              </Link>
+              <Link
+                to={`/edit-user/${user._id}`}
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+              >
+                Edit
+              </Link>
+              <button
+                onClick={() => handleOpenPopup(user._id)}
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+              >
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
       </div>
       <ConfirmDeletePopup
         open={popupOpen}

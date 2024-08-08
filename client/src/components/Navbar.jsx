@@ -42,7 +42,7 @@ function Navbar() {
   }, []);
 
   return (
-    <header className="bg-[--primary-color] text-xl font-semibold lg:flex lg:flex-row sm:flex sm:flex-col sm:items-center justify-between items-center p-4 px-7">
+    <header className="bg-[--primary-color] text-xl font-semibold flex    justify-between items-center p-4 px-7">
       <div>
         <Link to="/">
           <img src="./white-logo.svg" alt="logo" className="object-cover w-16 cursor-pointer" />
@@ -50,8 +50,8 @@ function Navbar() {
       </div>
 
       {/* Main Navigation Links */}
-      <div className="lg:flex justify-around items-center sm:hidden">
-        <ul className="list-none lg:flex gap-2 text-[--text-color]">
+      <div className="  hidden sm:flex md:hidden ">
+        <ul className="list-none  hidden sm:flex  gap-2 text-[--text-color]">
           <li><a href="#Home" className="scroll-smooth">Home</a></li>
           <li><a href="#Features" className="scroll-smooth">Features</a></li>
           <li><a href="#About" className="transition delay-1000 duration-300 scroll-smooth">About</a></li>
@@ -68,7 +68,7 @@ function Navbar() {
             <img
               src={userImage || './default-avatar.png'} // Ensure fallback works
               alt="User Avatar"
-              className="object-cover w-full h-full"
+              className="object-cover sm:w-full sm:h-full w-fit h-fit "
               onError={(e) => {
                 console.error('Image load error:', e);
                 console.error('Image URL:', e.target.src); // Log the URL that failed
@@ -78,29 +78,29 @@ function Navbar() {
 
           {/* Dropdown Menu */}
           {menuOpen && (
-            <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-48">
-              <ul className="list-none p-2">
+            <div className="absolute -right-2.5 mt-1 bg-[--primary-color] shadow-lg rounded-lg w-48 z-10">
+              <ul className="list-none p-2  ">
                 <li>
-                  <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                  <Link to="/profile" className="block px-4 py-2 text-[--text-color] hover:text-gray-400 ">
                     Profile
                   </Link>
                 </li>
                 {user.isAdmin && (
                   <li>
-                    <Link to="/dashboard" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <Link to="/dashboard" className="block px-4 py-2 text-[--text-color] hover:text-gray-400">
                       Dashboard
                     </Link>
                   </li>
                 )}
                 <li>
-                  <Link to="/formation" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                  <Link to="/formation" className="block px-4 py-2 text-[--text-color] hover:text-gray-400">
                     Courses
                   </Link>
                 </li>
                 <li>
                   <button
                     onClick={logout}
-                    className="block px-4 py-2 w-full text-gray-700 hover:bg-gray-100 text-left"
+                    className="block px-4 py-2 w-full text-[--text-color] hover:text-gray-400 text-left"
                   >
                     Logout
                   </button>

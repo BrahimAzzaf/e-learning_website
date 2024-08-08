@@ -20,11 +20,11 @@ const CourseCard = ({ course }) => {
   const { _id, title, description, image, createdBy, videoLinks } = course;
 
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg border border-gray-200 m-4">
+    <div className="max-w-sm rounded overflow-hidden shadow-xl   m-4">
       <Link to={`/formation/course/${_id}`}>
         <img className="w-full" src={image} alt={title} />
       </Link>
-      <div className="px-6 py-4">
+      <div className="px-2 py-4">
       <Link to={`/formation/course/${_id}`} className="font-bold text-xl mb-2 hover:underline">
         {truncateTitle(title, 30)}
       </Link>
@@ -32,10 +32,10 @@ const CourseCard = ({ course }) => {
           {truncateDescription(description, 40)}
           </p>
       </div>
-      <div className="px-6 pt-4 pb-2 flex justify-between items-center">
+      <div className="px-2 pt-4 pb-2 flex justify-between gap-2 items-center">
         <div className="flex items-center">
           <img
-            className="w-10 h-10 rounded-full mr-4"
+            className="w-7 h-7 rounded-full mr-2"
             src={createdBy?.image || 'default-avatar.png'}
             alt={createdBy?.name || 'Unknown Creator'}
           />
