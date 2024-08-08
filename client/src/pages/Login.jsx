@@ -40,13 +40,13 @@ const Login = () => {
 
   const loginUser = async (e) => {
     e.preventDefault();
-
+  
     const validationErrors = validateInputs();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-
+  
     const { email, password } = data;
     try {
       const response = await axios.post('http://localhost:8000/api/auth/login', {
@@ -55,7 +55,7 @@ const Login = () => {
       }, {
         withCredentials: true  // Ensure credentials are sent with the request
       });
-
+  
       if (response.data.error) {
         toast.error(response.data.error, {
           icon: '🚫',
@@ -79,9 +79,10 @@ const Login = () => {
           color: 'white',
         },
       });
-      console.error('Error logging in:', error);
+      console.error('Error logging in:', error.response.data); // Log detailed error response
     }
   };
+  
 
   return (
     <div className="flex justify-between items-center h-screen bg-gradient-to-b from-[#063D41] via-[#336a6c] to-[#4B7]">

@@ -6,10 +6,11 @@ const courseSchema = new Schema({
     description: String,
     course: String,
     image: String, // Image URL
-    videos: [{ type: Schema.Types.ObjectId, ref: 'Video' }],
+    videos: [{ type: Schema.Types.ObjectId, ref: 'Video' }], // Array of Video references
     createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
-    attachments: [String] // Array of file URLs
-}, { timestamps: true }); // Add timestamps option
+    attachments: [String],
+    videoLinks: [String] // Array of YouTube video links specific to the course
+}, { timestamps: true });
 
 const CourseModel = mongoose.model('Course', courseSchema);
 

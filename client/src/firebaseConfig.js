@@ -2,13 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyALep5h7owUTOxvLMOX-uRQtuqfLYhK4A4",
-    authDomain: "e-learning-9e559.firebaseapp.com",
-    projectId: "e-learning-9e559",
-    storageBucket: "e-learning-9e559.appspot.com",
-    messagingSenderId: "584339417100",
-    appId: "1:584339417100:web:62f071db6a1d4c7698a629",
-    measurementId: "G-MZC1M8FNCB"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);

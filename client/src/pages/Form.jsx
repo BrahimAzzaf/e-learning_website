@@ -1,6 +1,11 @@
+// src/components/Form.jsx
+
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 function Form() {
     const [firstName, setFirstName] = useState('');
@@ -9,22 +14,57 @@ function Form() {
     const [email, setEmail] = useState('');
     const [localisation, setLocalisation] = useState('');
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('First Name:', firstName);
-        console.log('Last Name:', lastName);
-        console.log('Phone Number:', phoneNumber);
-        console.log('Email:', email);
-        console.log('Localisation:', localisation);
+        
+        try {
+            const response = await axios.post('/api/form', {
+                firstName,
+                lastName,
+                phoneNumber,
+                email,
+                localisation
+            });
+
+            console.log('Form submitted successfully:', response.data);
+            
+            // Show success toast
+            toast.success('Form Successfully Submitted', {
+                icon: '🎉',
+                style: {
+                    backgroundColor: 'green',
+                    color: 'white',
+                },
+            });
+
+            // Reset form fields
+            setFirstName('');
+            setLastName('');
+            setPhoneNumber('');
+            setEmail('');
+            setLocalisation('');
+
+            // Redirect to /formation
+            navigate('/formation');
+        } catch (error) {
+            console.error('Error submitting form:', error);
+
+            // Show error toast
+            toast.error('Error submitting form. Please try again.', {
+                icon: '🚫',
+                style: {
+                    backgroundColor: 'red',
+                    color: 'white',
+                },
+            });
+        }
     };
 
     return (
         <>
-        
-        <Navbar />
-
-        
-
+            <Navbar />
             <h2 className="text-6xl font-bold mb-2 text-center p-10 text-[--button-color]">Please Fill Up The Form</h2>
             <div className="w-full flex items-center justify-center bg-white">
                 <form className="w-full flex flex-col justify-center lg:max-w-3xl p-8" onSubmit={handleSubmit}>
@@ -108,8 +148,7 @@ function Form() {
                 </form>
             </div>
 
-    <Footer />
-
+            <Footer />
         </>
     );
 }

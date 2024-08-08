@@ -26,6 +26,7 @@ app.use(cors({
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/courses', require('./routes/coursesRoute'));
+app.use('/api/form', require('./routes/formRoutes')); // Make sure this matches your API calls
 app.use('/', require('./routes/dashboardRoutes'));
 app.use('/api', require('./routes/userRoutes'));
 

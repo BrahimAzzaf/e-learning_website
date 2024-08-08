@@ -6,8 +6,9 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
-function DashSidebar({ setView }) {
+function DashSidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -27,22 +28,26 @@ function DashSidebar({ setView }) {
         </button>
       </div>
       <nav className='text-white'>
-        <button onClick={() => setView('home')} className="w-full py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center group">
+        <Link to="/dashboard" className="w-full py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center group">
           <DashboardIcon className="mr-2" />
           <span className={`ml-2 transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>Dashboard</span>
-        </button>
-        <button onClick={() => setView('users')} className="w-full py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center group">
+        </Link>
+        <Link to="/dashboard/users" className="w-full py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center group">
           <PeopleIcon className="mr-2" />
           <span className={`ml-2 transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>Users</span>
-        </button>
-        <button onClick={() => setView('courses')} className="w-full py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center group">
+        </Link>
+        <Link to="/dashboard/courses" className="w-full py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center group">
           <SchoolIcon className="mr-2" />
           <span className={`ml-2 transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>Courses</span>
-        </button>
-        <button onClick={() => setView('profile')} className="w-full py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center group">
+        </Link>
+        {/* <Link to="/dashboard/videos" className="w-full py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center group">
           <OndemandVideoIcon className="mr-2" />
           <span className={`ml-2 transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>Videos</span>
-        </button>
+        </Link> */}
+        <Link to="/dashboard/forms" className="w-full py-2.5 px-4 rounded transition duration-200 hover:bg-[--button-color] flex items-center group">
+          <InsertDriveFileIcon className="mr-2" />
+          <span className={`ml-2 transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>Forms</span>
+        </Link>
       </nav>
     </div>
   );

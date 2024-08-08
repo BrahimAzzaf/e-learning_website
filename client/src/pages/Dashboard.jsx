@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DashSidebar from '../components/DashSidebar';
 import DashUsers from '../components/DashUsers';
 import DashHome from '../components/DashHome';
 import DashCourses from '../components/DashCourses';
+import DashVideos from './DashVideos';
+import DashForms from './DashForms';
 
 function Dashboard() {
-  const [view, setView] = useState('home'); // Default to 'users' view
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,13 +30,19 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-100 flex">
       {/* Sidebar */}
-      <DashSidebar setView={setView} />
+      <DashSidebar />
 
       {/* Main Content */}
       <div className="flex flex-col flex-grow">
-        {view === 'home' && <DashHome />}
-        {view === 'users' && <DashUsers />}
-        {view === 'courses' && <DashCourses />}
+        <Routes>
+          <Route path="/" element={<DashHome />} />
+          <Route path="users" element={<DashUsers />} />
+          <Route path="courses" element={<DashCourses />} />
+          {/* <Route path="videos" element={<DashVideos />} /> */}
+          <Route path="forms" element={<DashForms />} />
+
+          {/* Add more routes as needed */}
+        </Routes>
       </div>
     </div>
   );

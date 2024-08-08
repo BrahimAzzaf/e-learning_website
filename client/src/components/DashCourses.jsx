@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ConfirmDeletePopup from '../components/ConfirmDeletePopupCourse';
+import loaderGif from '../assets/spin.gif'; 
 
 function DashCourses() {
   const [courses, setCourses] = useState([]);
@@ -53,8 +54,13 @@ function DashCourses() {
     setSelectedCourseId(null);
   };
 
+  // Show loader while course data is being fetched
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <img src={loaderGif} alt="Loading..." className="w-16 h-16" />
+      </div>
+    );
   }
 
   return (
@@ -106,7 +112,7 @@ function DashCourses() {
                       View
                     </Link>
                     <Link
-                      to={`/edit-course/${course._id}`}
+                      to={`/courses/edit/${course._id}`}
                       className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
                     >
                       Edit

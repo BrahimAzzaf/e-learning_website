@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { storage } from '../firebaseStorage';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import loaderGif from '../assets/spin.gif'; // Add the correct path to your loader GIF
+import DashSidebar from '../components/DashSidebar';
 
 const EditUser = () => {
   const { userId } = useParams();
@@ -14,6 +15,9 @@ const EditUser = () => {
     isAdmin: false,
     image: null,
   });
+  const [view, setView] = useState('home'); // Default to 'users' view
+
+
 
   const [loading, setLoading] = useState(false);
 
@@ -97,12 +101,18 @@ const EditUser = () => {
       : '/path-to-default-image.jpg'; // Replace with your default image path
 
   return (
-    <div className="flex flex-col items-center p-8 bg-gray-100 min-h-screen">
-      <h2 className="text-4xl font-bold mb-8">Edit User</h2>
+    
+    <div className="min-h-screen  flex">
+      {/* Sidebar */}
+      <DashSidebar setView={setView} />
+      <h1 className="text-4xl font-bold m-4 text-[--button-color]">View User</h1>
+
+    <div className=" p-8  min-h-screen  w-[605px]">
+      {/* <h2 className="text-4xl font-bold mb-8">Edit User</h2> */}
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 w-full max-w-3xl">
-        <div className="flex items-center justify-center mb-6">
+        <div className="flex  items-center justify-center mb-6 ">
           <div
-            className="relative w-48 h-48 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center bg-gray-50 cursor-pointer"
+            className="relative w-48 h-48 border-2  border-dashed border-gray-300 rounded-md flex items-center justify-center bg-gray-50 cursor-pointer"
             onClick={() => document.getElementById('fileInput').click()}
             onDragOver={(e) => e.preventDefault()}
             onDrop={handleDrop}
@@ -113,14 +123,14 @@ const EditUser = () => {
               <img
                 src={imageSrc}
                 alt="Profile"
-                className="w-full h-full object-cover rounded-md"
+                className="w-full h-full object-cover rounded-full "
               />
             )}
             <input
               id="fileInput"
               type="file"
               onChange={(e) => handleFileChange(e.target.files[0])}
-              className="hidden"
+              className="hidden "
             />
           </div>
         </div>
@@ -131,7 +141,7 @@ const EditUser = () => {
             name="name"
             value={user.name}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md"
+            className="w-full p-3 border rounded-md text-[--grey-color]"
           />
         </div>
         <div className="mb-4">
@@ -141,7 +151,7 @@ const EditUser = () => {
             name="email"
             value={user.email}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md"
+            className="w-full p-3  border border-[#858585] rounded-md text-[--grey-color]"
           />
         </div>
         <div className="mb-4">
@@ -151,7 +161,7 @@ const EditUser = () => {
             name="password"
             value={user.password}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md"
+            className="w-full p-3 border rounded-md text-[--grey-color]"
           />
         </div>
         <div className="mb-4">
@@ -160,7 +170,7 @@ const EditUser = () => {
             name="role"
             value={user.isAdmin ? 'admin' : 'user'}
             onChange={handleDropdownChange}
-            className="w-full p-3 border rounded-md"
+            className="w-full p-3 border rounded-md text-[--grey-color]"
           >
             <option value="user">User</option>
             <option value="admin">Admin</option>
@@ -168,11 +178,13 @@ const EditUser = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-100 text-blue-900 font-semibold py-2 px-4 rounded-md hover:bg-blue-200"
-        >
-          Update User
+          // className="w-full bg-blue-100 text-blue-900 font-semibold py-2 px-4 rounded-md text-[--grey-color] hover:bg-blue-200"
+          className="w-full bg-[--button-color] border-[3px] cursor-pointer border-transparent text-[--text-color] text-xl font-semibold py-2 px-4 rounded-2xl hover:bg-transparent hover:text-[--button-color] hover:border-[--button-color] focus:outline-none focus:bg-[--primary-color] focus:text-[--text-color]"
+          >
+          Update
         </button>
       </form>
+    </div>
     </div>
   );
 };

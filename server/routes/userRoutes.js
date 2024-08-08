@@ -1,7 +1,8 @@
 const express = require('express');
-const { requireAdmin } = require('../middlewares/auth');
+const { requireAdmin } = require('../middlewares/auth'); // Import authentication middleware
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const authenticateUser = require('../middlewares/authenticateUser');
 const router = express.Router();
 
 // Fetch all users
@@ -97,5 +98,42 @@ router.post('/users', async (req, res) => {
         res.status(500).json({ error: 'Failed to add user' });
     }
 });
+
+// Fetch current user
+router.get('/user/me', authenticateUser, async (req, res) => {
+    try {
+        const userId = req.user.id; // Assuming req.user is populated by the authenticateToken middleware
+        const user = await User.findById(userId).select('name email image'); // Select fields to return
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        res.json(user);
+    } catch (err) {
+        console.error('Error fetching current user:', err);
+        res.status(500).json({ error: 'Something went wrong' });
+    }
+});
+
+// Route to get user by email
+router.get('/email/:email', async (req, res) => {
+    try {
+      const { email } = req.params;
+      console.log('Fetching user for email:', email); // Debugging line
+      const user = await User.findOne({ email: email }).exec();
+  
+      console.log('User found:', user); // Debugging line
+  
+      if (!user) {
+        return res.status(404).json({ error: 'No user found for this email' });
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      res.status(500).json({ error: 'An error occurred while fetching user data' });
+    }
+  });
+  
 
 module.exports = router;

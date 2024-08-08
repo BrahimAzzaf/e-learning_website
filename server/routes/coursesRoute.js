@@ -6,7 +6,7 @@ const authenticateUser = require('../../server/middlewares/authenticateUser');
 
 // Create a new course
 router.post('/create', authenticateUser, async (req, res) => {
-    const { title, description, course, image } = req.body;
+    const { title, description, course, image, attachments, videoLinks } = req.body;
     const createdBy = req.user._id; // Use authenticated user's ID
 
     try {
@@ -15,14 +15,18 @@ router.post('/create', authenticateUser, async (req, res) => {
             description,
             course,
             image,
+            attachments,
+            videoLinks, // Include videoLinks here
             createdBy
         });
         await newCourse.save();
         res.status(201).json(newCourse);
     } catch (error) {
+        console.error('Error creating course:', error); // Add detailed logging
         res.status(500).json({ error: error.message });
     }
 });
+
 
 // Get total courses count
 router.get('/count', requireAdmin, async (req, res) => {
@@ -38,12 +42,16 @@ router.get('/count', requireAdmin, async (req, res) => {
 // Get all courses
 router.get('/', async (req, res) => {
     try {
-        const courses = await CourseModel.find();
-        res.status(200).json(courses);
+      // Ensure `image` is included in the populate method if needed
+      const courses = await CourseModel.find().populate('createdBy', 'name image');
+      res.status(200).json(courses);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+      console.error('Error fetching courses:', error);
+      res.status(500).json({ error: error.message });
     }
-});
+  });
+  
+  
 
 // Get course by ID
 router.get('/:id', async (req, res) => {
@@ -75,5 +83,51 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+
+
+// Edit an existing course
+router.put('/:id', authenticateUser, async (req, res) => {
+  const { id } = req.params;
+  const { title, description, course, image, attachments, videoLinks } = req.body;
+  
+  try {
+    const updatedCourse = await CourseModel.findByIdAndUpdate(
+      id,
+      {
+        title,
+        description,
+        course,
+        image,
+        attachments,
+        videoLinks,
+        updatedAt: new Date(),
+      },
+      { new: true } // Return the updated course
+    );
+
+    if (updatedCourse) {
+      res.status(200).json(updatedCourse);
+    } else {
+      res.status(404).json({ message: 'Course not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+
+router.get('/api/courses', async (req, res) => {
+    try {
+      const courses = await CourseModel.find().populate('createdBy', 'name image');
+      res.status(200).json(courses);
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+
 
 module.exports = router;
